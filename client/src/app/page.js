@@ -11,10 +11,17 @@ export default function App() {
       console.log(res.data);
     });
   }
+
+  const member = () => {
+    axios.get("http://localhost:3001/api/users").then((res) => {
+      console.log(res.data);
+    });
+  }
   
   return (
     <div>
-      <button onClick={onClick}>Hello!</button>
+      <button onClick={onClick}>클릭</button>
+      <button onClick={member}>멤버</button>
     </div>
   )
 }
