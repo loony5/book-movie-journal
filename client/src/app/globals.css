@@ -37,6 +37,17 @@ body {
   /* min-height: 100vh; */
 }
 
+.sign {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+  justify-content: center;
+  height: 100vh;
+  width: 400px;
+  margin: auto;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

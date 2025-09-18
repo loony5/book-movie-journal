@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                   <Link  href="/">Book & Movie Journal</Link>
                 </Typography>
-                <Link  href="/login">Login</Link>
+                <Link  href="/sign-in">Sign In</Link>
               </Toolbar>
             </AppBar>
           </Box>
