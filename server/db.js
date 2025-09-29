@@ -1,4 +1,4 @@
-const mysql = require('mysql')
+const mysql = require('mysql');
 
 const db = {
   init: function () {
@@ -11,10 +11,10 @@ const db = {
   },
   connect: function (conn) {
     conn.connect(function (err) {
-      if (err) console.error('mysql connection error : ' + err)
-      else console.log('mysql is connected successfully!')
+      if (err) console.error('mysql connection error : ' + err);
+      else console.log('mysql is connected successfully!');
     });
   },
 };
 
-module.exports = db
+module.exports = db;
