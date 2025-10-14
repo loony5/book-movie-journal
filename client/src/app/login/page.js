@@ -5,11 +5,11 @@ import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import Link from 'next/link';
 
-export default function signin() {
+export default function login() {
   const user = React.useState({ id: '', password: '' });
 
   return (
-    <div className=' sign'>
+    <div className=' join'>
       <TextField
         id='outlined-basic'
         label='ID'
@@ -22,9 +22,14 @@ export default function signin() {
         variant='outlined'
         defaultValue={user.password}
       />
-      <Button>
-        <Link href='/sign-up'>Sign Up</Link>
-      </Button>
+      <div className='button-wrap'>
+        <Button variant='outlined'>
+          <Link href='/join'>회원가입</Link>
+        </Button>
+        <Button variant='contained'>
+          <Link href='/'>확인</Link>
+        </Button>
+      </div>
     </div>
   );
 }

@@ -39,7 +39,7 @@ const appbar = ({ children }) => {
             <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
               <Link href='/'>Book & Movie Journal</Link>
             </Typography>
-            <Link href='/sign-in'>Sign In</Link>
+            <Link href='/login'>로그인</Link>
           </Toolbar>
         </AppBar>
       </Box>
