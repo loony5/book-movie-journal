@@ -20,7 +20,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      httpOnly: trud, // JS에서 쿠키 접근 불가 (보안)
+      httpOnly: true, // JS에서 쿠키 접근 불가 (보안)
       maxAge: 1000 * 60 * 60, // 1시간 유지
     },
   })
