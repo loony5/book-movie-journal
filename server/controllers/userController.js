@@ -44,7 +44,15 @@ module.exports = (conn) => {
         if (!bcrypt.compareSync(password, user.password))
           return res.status(400).json({ error: '비밀번호 틀림' });
 
-        res.json({ message: '로그인 성공' });
+        // 세션에 사용자 정보 저장
+        req.session.user = {
+          id: user.userId,
+          name: user.name,
+          phone: user.phone,
+          image: user.image,
+        };
+
+        res.json({ message: '로그인 성공', user: req.session.user });
       });
     },
   };

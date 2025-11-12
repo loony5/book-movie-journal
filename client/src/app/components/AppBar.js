@@ -1,5 +1,7 @@
 'use client';
 
+import { useUser } from '../context/UserContext';
+import axios from 'axios';
 import dynamic from 'next/dynamic';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -8,7 +10,6 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-
 import Link from 'next/link';
 
 // Create a component to wrap your children
@@ -22,6 +23,17 @@ const NoSSRWrapper = dynamic(() => Promise.resolve(ClientOnly), {
 });
 
 const appbar = ({ children }) => {
+  const { user, setUser } = useUser();
+
+  const handleLogout = async () => {
+    await axios.post(
+      'http://localhost:3001/api/users/logout',
+      {},
+      { withCredentials: true }
+    );
+    setUser(null);
+  };
+
   return (
     <div className='root-container'>
       <Box sx={{ flexGrow: 1 }}>
@@ -39,7 +51,29 @@ const appbar = ({ children }) => {
             <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
               <Link href='/'>Book & Movie Journal</Link>
             </Typography>
-            <Link href='/login'>로그인</Link>
+
+            {user ? (
+              <>
+                <Typography sx={{ mr: 2 }}>{user.name} 님</Typography>
+                {user.image && (
+                  <img
+                    src={user.image}
+                    alt='프로필'
+                    style={{
+                      width: '32px',
+                      height: '32px',
+                      borderRadius: '50%',
+                      marginRight: '10px',
+                    }}
+                  />
+                )}
+                <Button color='inherit' onClick={handleLogout}>
+                  로그아웃
+                </Button>
+              </>
+            ) : (
+              <Link href='/login'>로그인</Link>
+            )}
           </Toolbar>
         </AppBar>
       </Box>

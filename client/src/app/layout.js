@@ -1,4 +1,5 @@
 import './globals.css';
+import { UserProvider } from '@/context/UserContext';
 import AppBar from './components/AppBar';
 
 export const metadata = {
@@ -9,7 +10,9 @@ export default function RootLayout({ children }) {
   return (
     <html>
       <body suppressHydrationWarning>
-        <AppBar children={children} />
+        <UserProvider>
+          <AppBar children={children} />
+        </UserProvider>
       </body>
     </html>
   );
