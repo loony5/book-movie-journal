@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
     <html>
       <body suppressHydrationWarning>
         <UserProvider>
-          <AppBar children={children} />
+          <AppBar>{children}</AppBar>
         </UserProvider>
       </body>
     </html>

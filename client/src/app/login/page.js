@@ -8,7 +8,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
-export default function login() {
+export default function Login() {
   const router = useRouter();
   const { setUser } = useUser();
   const [user, setLoginUser] = useState({ id: '', password: '' });

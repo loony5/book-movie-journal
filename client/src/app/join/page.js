@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 
-export default function singup() {
+export default function Signup() {
   const router = useRouter();
 
   const [user, setUser] = useState({

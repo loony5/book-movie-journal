@@ -22,7 +22,7 @@ const NoSSRWrapper = dynamic(() => Promise.resolve(ClientOnly), {
   ssr: false,
 });
 
-const appbar = ({ children }) => {
+const AppBarComponent = ({ children }) => {
   const { user, setUser } = useUser();
 
   const handleLogout = async () => {
@@ -82,7 +82,7 @@ const appbar = ({ children }) => {
   );
 };
 
-export default dynamic(() => Promise.resolve(appbar), {
+export default dynamic(() => Promise.resolve(AppBarComponent), {
   ssr: false,
   loading: () => <p>Loading component...</p>,
 });
