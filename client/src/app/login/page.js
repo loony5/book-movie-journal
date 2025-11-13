@@ -26,7 +26,7 @@ export default function Login() {
   };
 
   return (
-    <div className=' join'>
+    <div className='join'>
       <TextField
         label='ID'
         variant='outlined'

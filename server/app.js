@@ -1,8 +1,11 @@
+require('dotenv').config({ path: __dirname + '/.env' });
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
 const db = require('./db.js'); // 기존 db 모듈 (init/connect 제공)
 const MySQLStore = require('express-mysql-session')(session);
+const searchRoutes = require('./routes/search');
+const reviewRoutes = require('./routes/review');
 
 const app = express();
 const port = 3001;
@@ -39,6 +42,9 @@ app.use(
 );
 
 app.use(express.urlencoded({ extended: true })); // form 데이터 받을 때
+
+app.use('/api/search', searchRoutes);
+app.use('/api/reviews', reviewRoutes(conn));
 
 const conn = db.init();
 db.connect(conn);

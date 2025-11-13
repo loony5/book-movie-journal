@@ -36,7 +36,8 @@ body {
   /* min-height: 100vh; */
 }
 
-.join {
+.join,
+.main {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -45,6 +46,25 @@ body {
   height: calc(100vh - 64px);
   width: 400px;
   margin: auto;
+}
+.main {
+  justify-content: start;
+  overflow: auto;
+  width: 100%;
+  align-items: center;
+}
+
+.card-wrapper {
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  text-align: center;
+}
+
+.search {
+  width: 500px;
+  height: 500px;
 }
 
 .button-wrap {

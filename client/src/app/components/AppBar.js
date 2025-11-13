@@ -77,7 +77,9 @@ const AppBarComponent = ({ children }) => {
           </Toolbar>
         </AppBar>
       </Box>
-      <NoSSRWrapper>{children}</NoSSRWrapper>
+      <NoSSRWrapper>
+        <div className='main'>{children}</div>
+      </NoSSRWrapper>
     </div>
   );
 };

@@ -2,24 +2,24 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Card from './components/Card';
+import Button from '@mui/material/Button';
+import Link from 'next/link';
+import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import AddCircle from '@mui/icons-material/AddCircle';
 
 export default function App() {
-  const onClick = () => {
-    axios.get('http://localhost:3001/').then((res) => {
-      console.log(res.data);
-    });
-  };
-
-  const member = () => {
-    axios.get('http://localhost:3001/api/users').then((res) => {
-      console.log(res.data);
-    });
-  };
-
+  const items = ['Apple', 'Banana', 'Cherry', 'Date'];
   return (
-    <div>
-      <button onClick={onClick}>클릭</button>
-      <button onClick={member}>멤버</button>
-    </div>
+    <>
+      <Button color='inherit'>
+        <Link href='/review'>리뷰하기</Link>
+      </Button>
+      <div className='card-wrapper'>
+        {items.map((item, index) => (
+          <Card></Card>
+        ))}
+      </div>
+    </>
   );
 }
