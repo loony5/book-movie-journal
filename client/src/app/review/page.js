@@ -1,7 +1,11 @@
 'use client';
 import React, { useState } from 'react';
 import axios from 'axios';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 import { useRouter } from 'next/navigation';
 import { TextField, Button } from '@mui/material';
 
@@ -31,10 +35,10 @@ export default function ReviewSearch() {
   };
 
   return (
-    <div className='p-6'>
-      <div className='flex gap-2 mb-4'>
+    <div className='main'>
+      <div className='search-field'>
         <TextField
-          label='검색어'
+          label='책 및 영화 검색'
           variant='outlined'
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -44,27 +48,31 @@ export default function ReviewSearch() {
         </Button>
       </div>
 
-      <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+      <Grid container spacing={2} className='search-result'>
         {results.map((item, idx) => (
-          <div
-            key={idx}
-            className='border p-2 rounded cursor-pointer hover:shadow-lg transition'
-            onClick={() => handleSelect(item)}
-          >
-            {item.image && (
-              <CardMedia
-                component='img'
-                image={item.image}
-                alt={item.title}
-                height={194}
-              />
-            )}
-            <p className='mt-2 text-sm font-medium'>
-              {item.title.replace(/<[^>]*>?/g, '')}
-            </p>
-          </div>
+          <Grid size={6} className='search-item'>
+            <Card
+              sx={{ maxWidth: 200 }}
+              key={idx}
+              onClick={() => handleSelect(item)}
+            >
+              {item.image && (
+                <CardMedia
+                  component='img'
+                  image={item.image}
+                  alt={item.title}
+                  height={300}
+                />
+              )}
+              <CardContent>
+                <Typography variant='body2' sx={{ color: 'text.secondary' }}>
+                  {item.title.replace(/<[^>]*>?/g, '')}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
         ))}
-      </div>
+      </Grid>
     </div>
   );
 }

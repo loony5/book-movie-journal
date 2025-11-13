@@ -3,9 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Button } from '@mui/material';
 import { useSearchParams } from 'next/navigation';
 import axios from 'axios';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { useRouter } from 'next/navigation';
 
 export default function WriteReview() {
+  const router = useRouter();
   const params = useSearchParams();
   const [book, setBook] = useState(null);
   const [review, setReview] = useState('');
@@ -27,7 +32,8 @@ export default function WriteReview() {
         },
         { withCredentials: true } // 세션 쿠키 포함!
       );
-      alert('리뷰가 저장되었습니다!');
+      alert('리뷰가 업로드되었습니다!');
+      router.push('/');
     } catch (err) {
       if (err.response?.status === 401) {
         alert('로그인이 필요합니다.');
@@ -39,31 +45,33 @@ export default function WriteReview() {
   };
 
   return (
-    <div className='p-6'>
+    <div className='card-wrapper'>
       {book && (
-        <div className='flex gap-4 mb-4 items-center'>
+        <Card>
           {book.image && (
             <CardMedia
+              component='img'
+              height={300}
               image={book.image}
               alt={book.title}
-              width='100'
-              height='500'
             />
           )}
-          <h2 className='text-xl font-semibold'>{book.title}</h2>
-        </div>
+          <CardContent>
+            <Typography>{book.title}</Typography>
+          </CardContent>
+        </Card>
       )}
 
       <TextField
         multiline
         rows={5}
         fullWidth
-        label='리뷰 내용'
+        label='리뷰'
         value={review}
         onChange={(e) => setReview(e.target.value)}
       />
       <Button variant='contained' className='mt-4' onClick={handleSubmit}>
-        리뷰 저장
+        게시물 올리기
       </Button>
     </div>
   );

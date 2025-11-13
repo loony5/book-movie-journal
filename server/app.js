@@ -44,13 +44,13 @@ app.use(
 app.use(express.urlencoded({ extended: true })); // form 데이터 받을 때
 
 app.use('/api/search', searchRoutes);
-app.use('/api/reviews', reviewRoutes(conn));
 
 const conn = db.init();
 db.connect(conn);
 
 const userRoutes = require('./routes/users');
 app.use('/api/users', userRoutes(conn));
+app.use('/api/reviews', reviewRoutes(conn));
 
 app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}`);

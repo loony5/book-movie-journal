@@ -67,6 +67,22 @@ body {
   height: 500px;
 }
 
+.search-result {
+  max-width: 600px !important;
+  margin-bottom: 50px;
+}
+
+.search-item {
+  display: flex;
+  justify-content: center;
+}
+
+.search-field {
+  margin: 50px 0 0 0;
+  display: flex;
+  gap: 20px;
+}
+
 .button-wrap {
   display: flex;
   gap: 10px;
