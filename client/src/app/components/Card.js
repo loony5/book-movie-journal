@@ -35,11 +35,11 @@ const CardComponent = ({ review }) => {
             </Typography>
           </div>
         }
-        action={
-          <IconButton aria-label='settings'>
-            <MoreVertIcon />
-          </IconButton>
-        }
+        // action={
+        //   <IconButton aria-label='settings'>
+        //     <MoreVertIcon />
+        //   </IconButton>
+        // }
         title={review.title}
         subheader={new Date(review.created_at).toLocaleDateString()}
       />

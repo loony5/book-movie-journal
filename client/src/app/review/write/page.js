@@ -47,11 +47,12 @@ export default function WriteReview() {
   return (
     <div className='card-wrapper'>
       {book && (
-        <Card>
+        <Card sx={{ maxWidth: 400 }}>
           {book.image && (
             <CardMedia
               component='img'
-              height={300}
+              height='600'
+              width='auto'
               image={book.image}
               alt={book.title}
             />
@@ -64,14 +65,14 @@ export default function WriteReview() {
 
       <TextField
         multiline
-        rows={5}
+        rows={10}
         fullWidth
         label='리뷰'
         value={review}
         onChange={(e) => setReview(e.target.value)}
       />
       <Button variant='contained' className='mt-4' onClick={handleSubmit}>
-        게시물 올리기
+        리뷰 올리기
       </Button>
     </div>
   );

@@ -8,6 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { useRouter } from 'next/navigation';
 import { TextField, Button } from '@mui/material';
+import CardActionArea from '@mui/material/CardActionArea';
 
 export default function ReviewSearch() {
   const [query, setQuery] = useState('');
@@ -42,6 +43,7 @@ export default function ReviewSearch() {
           variant='outlined'
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          fullWidth
         />
         <Button variant='contained' onClick={handleSearch}>
           검색
@@ -51,24 +53,22 @@ export default function ReviewSearch() {
       <Grid container spacing={2} className='search-result'>
         {results.map((item, idx) => (
           <Grid size={6} className='search-item'>
-            <Card
-              sx={{ maxWidth: 200 }}
-              key={idx}
-              onClick={() => handleSelect(item)}
-            >
-              {item.image && (
-                <CardMedia
-                  component='img'
-                  image={item.image}
-                  alt={item.title}
-                  height={300}
-                />
-              )}
-              <CardContent>
-                <Typography variant='body2' sx={{ color: 'text.secondary' }}>
-                  {item.title.replace(/<[^>]*>?/g, '')}
-                </Typography>
-              </CardContent>
+            <Card sx={{ maxWidth: 200 }} key={idx}>
+              <CardActionArea onClick={() => handleSelect(item)}>
+                {item.image && (
+                  <CardMedia
+                    component='img'
+                    image={item.image}
+                    alt={item.title}
+                    height={300}
+                  />
+                )}
+                <CardContent>
+                  <Typography variant='body2' sx={{ color: 'text.secondary' }}>
+                    {item.title.replace(/<[^>]*>?/g, '')}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
             </Card>
           </Grid>
         ))}
