@@ -8,6 +8,7 @@ module.exports = (conn) => {
   router.post('/join', controller.join);
   router.post('/login', controller.login);
   router.get('/session', (req, res) => {
+    console.log('### session : ', req.session.user);
     if (req.session && req.session.user) {
       res.json({ isLoggedIn: true, user: req.session.user });
     } else {
@@ -21,6 +22,10 @@ module.exports = (conn) => {
       res.json({ message: '로그아웃 완료' });
     });
   });
+
+  // 네이버 로그인
+  router.get('/naver/login', controller.naverLogin);
+  router.get('/auth/naver/callback', controller.naverCallback);
 
   return router;
 };

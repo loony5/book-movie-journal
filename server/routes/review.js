@@ -7,6 +7,8 @@ module.exports = (conn) => {
     const { title, image, review } = req.body;
     const user = req.session.user;
 
+    console.log('###', user);
+
     // 로그인 체크
     if (!user) {
       return res.status(401).json({ message: '로그인이 필요합니다.' });
@@ -17,26 +19,36 @@ module.exports = (conn) => {
 
     try {
       const sql = `
-        INSERT INTO reviews (user_id, user_name, title, image, review)
-        VALUES (?, ?, ?, ?, ?)
-      `;
-      await conn.query(sql, [user.id, user.name, title, image, review]);
-      res.json({ message: '리뷰 저장 완료' });
+          INSERT INTO reviews (user_id, user_name, title, image, review, profile_image)
+          VALUES (?, ?, ?, ?, ?, ?)
+        `;
+
+      const [rows] = await conn
+        .promise()
+        .query(sql, [
+          user.userid,
+          user.name,
+          title,
+          image,
+          review,
+          user.profile_image,
+        ]);
+      res.json(rows);
     } catch (err) {
-      console.error('리뷰 저장 오류:', err);
+      console.error(err);
       res.status(500).json({ message: '서버 오류' });
     }
   });
 
-  // 리뷰 목록 가져오기 (옵션)
   router.get('/', async (req, res) => {
     try {
-      const sql = 'SELECT * FROM reviews ORDER BY created_at DESC';
-      const [rows] = await conn.query(sql);
+      const [rows] = await conn
+        .promise()
+        .query('SELECT * FROM reviews ORDER BY created_at DESC');
       res.json(rows);
     } catch (err) {
-      console.error('리뷰 목록 오류:', err);
-      res.status(500).json({ message: '서버 오류' });
+      console.error(err);
+      res.status(500).json({ error: err });
     }
   });
 

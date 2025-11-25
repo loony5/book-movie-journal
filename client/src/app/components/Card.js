@@ -21,11 +21,17 @@ const CardComponent = ({ review }) => {
       <CardHeader
         avatar={
           <div className='avatar'>
-            <Avatar sx={{ bgcolor: red[500] }} aria-label='recipe'>
-              {review.profile_image || review.user_name?.[0]}
+            <Avatar
+              sx={{ bgcolor: red[500] }}
+              aria-label='recipe'
+              src={review.profile_image}
+            >
+              {review.user_name?.[0]}
             </Avatar>
             <Typography variant='body2' sx={{ color: 'text.secondary' }}>
-              {review.user_id}
+              {review.user_id.length > 10
+                ? review.user_id.substring(0, 10) + '...'
+                : review.user_id}
             </Typography>
           </div>
         }

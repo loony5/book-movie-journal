@@ -40,6 +40,15 @@ export default function Login() {
         type='password'
         onChange={(e) => setLoginUser({ ...user, password: e.target.value })}
       />
+      <Button
+        variant='contained'
+        color='success'
+        onClick={() =>
+          (window.location.href = 'http://localhost:3001/api/users/naver/login')
+        }
+      >
+        네이버 로그인
+      </Button>
       <div className='button-wrap'>
         <Button variant='outlined'>
           <Link href='/join'>회원가입</Link>
