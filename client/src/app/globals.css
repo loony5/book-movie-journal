@@ -36,6 +36,13 @@ body {
   /* min-height: 100vh; */
 }
 
+.review-wrapper {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
 .join,
 .main {
   display: flex;
@@ -55,11 +62,17 @@ body {
 }
 
 .card-wrapper {
-  margin: 50px;
   display: flex;
   flex-direction: column;
   gap: 40px;
   text-align: center;
+}
+
+.avatar {
+  display: flex;
+  flex-direction: column;
+  gap: 5;
+  align-items: center;
 }
 
 .search {

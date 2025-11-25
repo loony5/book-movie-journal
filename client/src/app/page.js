@@ -1,25 +1,36 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import Card from './components/Card';
 import Button from '@mui/material/Button';
-import Link from 'next/link';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
-import AddCircle from '@mui/icons-material/AddCircle';
+import CardComponent from './components/Card';
 
 export default function App() {
-  const items = ['Apple', 'Banana', 'Cherry', 'Date'];
+  const [reviews, setReviews] = useState([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/api/reviews')
+      .then((res) => {
+        setReviews(res.data);
+      })
+      .catch((err) => {
+        console.error('리뷰 불러오기 실패:', err);
+      });
+  }, []);
+
   return (
-    <>
-      <Button color='inherit'>
-        <Link href='/review'>리뷰하기</Link>
+    <div className='review-wrapper'>
+      <Button variant='outlined' onClick={() => router.push('/review')}>
+        리뷰하기
       </Button>
       <div className='card-wrapper'>
-        {items.map((item, index) => (
-          <Card></Card>
+        {reviews.map((review) => (
+          <CardComponent key={review.id} review={review} />
         ))}
       </div>
-    </>
+    </div>
   );
 }

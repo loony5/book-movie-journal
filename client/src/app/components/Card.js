@@ -1,6 +1,5 @@
 'use client';
 
-import { styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -14,35 +13,42 @@ import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import dynamic from 'next/dynamic';
+import { userAgent } from 'next/server';
 
-const CardComponent = ({}) => {
+const CardComponent = ({ review }) => {
   return (
-    <Card sx={{ maxWidth: 800 }}>
+    <Card sx={{ maxWidth: 400 }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label='recipe'>
-            R
-          </Avatar>
+          <div className='avatar'>
+            <Avatar sx={{ bgcolor: red[500] }} aria-label='recipe'>
+              {review.profile_image || review.user_name?.[0]}
+            </Avatar>
+            <Typography variant='body2' sx={{ color: 'text.secondary' }}>
+              {review.user_id}
+            </Typography>
+          </div>
         }
         action={
           <IconButton aria-label='settings'>
             <MoreVertIcon />
           </IconButton>
         }
-        title='Shrimp and Chorizo Paella'
-        subheader='September 14, 2016'
+        title={review.title}
+        subheader={new Date(review.created_at).toLocaleDateString()}
       />
-      <CardMedia
-        component='img'
-        height='194'
-        image='/static/images/cards/paella.jpg'
-        alt='Paella dish'
-      />
+      {review.image && (
+        <CardMedia
+          component='img'
+          height='600'
+          width='auto'
+          image={review.image}
+          alt={review.title}
+        />
+      )}
       <CardContent>
         <Typography variant='body2' sx={{ color: 'text.secondary' }}>
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+          {review.review}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
