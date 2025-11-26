@@ -23,6 +23,13 @@ module.exports = (conn) => {
     });
   });
 
+  router.get('/check', (req, res) => {
+    if (req.session.user) {
+      return res.json({ loggedIn: true, user: req.session.user });
+    }
+    res.json({ loggedIn: false });
+  });
+
   // 네이버 로그인
   router.get('/naver/login', controller.naverLogin);
   router.get('/auth/naver/callback', controller.naverCallback);

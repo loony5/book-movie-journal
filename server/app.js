@@ -6,6 +6,8 @@ const db = require('./db.js'); // 기존 db 모듈 (init/connect 제공)
 const MySQLStore = require('express-mysql-session')(session);
 const searchRoutes = require('./routes/search');
 const reviewRoutes = require('./routes/review');
+const likesRoutes = require('./routes/likes');
+const bookmarksRoutes = require('./routes/bookmarks');
 
 const app = express();
 const port = 3001;
@@ -55,3 +57,6 @@ app.use('/api/reviews', reviewRoutes(conn));
 app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}`);
 });
+
+app.use('/api/likes', likesRoutes(conn));
+app.use('/api/bookmarks', bookmarksRoutes(conn));
