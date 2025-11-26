@@ -52,7 +52,7 @@ export default function ReviewSearch() {
 
       <Grid container spacing={2} className='search-result'>
         {results.map((item, idx) => (
-          <Grid size={6} className='search-item'>
+          <Grid size={6} className='search-item' key={idx}>
             <Card sx={{ maxWidth: 200 }} key={idx}>
               <CardActionArea onClick={() => handleSelect(item)}>
                 {item.image && (
