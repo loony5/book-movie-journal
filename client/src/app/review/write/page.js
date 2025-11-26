@@ -12,26 +12,28 @@ import { useRouter } from 'next/navigation';
 export default function WriteReview() {
   const router = useRouter();
   const params = useSearchParams();
-  const [book, setBook] = useState(null);
+  const [data, setData] = useState(null);
   const [review, setReview] = useState('');
 
   useEffect(() => {
-    const data = params.get('data');
-    if (data) setBook(JSON.parse(decodeURIComponent(data)));
+    const raw = params.get('data');
+    if (raw) setData(JSON.parse(decodeURIComponent(raw)));
   }, [params]);
 
   const handleSubmit = async () => {
     if (!review) return alert('리뷰 내용을 입력하세요.');
+
     try {
-      const res = await axios.post(
+      await axios.post(
         'http://localhost:3001/api/reviews',
         {
-          title: book.title,
-          image: book.image,
+          title: data.title,
+          image: data.image,
           review,
         },
-        { withCredentials: true } // 세션 쿠키 포함!
+        { withCredentials: true }
       );
+
       alert('리뷰가 업로드되었습니다!');
       router.push('/');
     } catch (err) {
@@ -46,19 +48,18 @@ export default function WriteReview() {
 
   return (
     <div className='card-wrapper'>
-      {book && (
+      {data && (
         <Card sx={{ maxWidth: 400 }}>
-          {book.image && (
+          {data.image && (
             <CardMedia
               component='img'
               height='600'
-              width='auto'
-              image={book.image}
-              alt={book.title}
+              image={data.image}
+              alt={data.title}
             />
           )}
           <CardContent>
-            <Typography>{book.title}</Typography>
+            <Typography>{data.title}</Typography>
           </CardContent>
         </Card>
       )}

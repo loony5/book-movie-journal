@@ -38,11 +38,7 @@ export default function App() {
   return (
     <div className='review-wrapper'>
       {loggedIn && (
-        <Button
-          variant='outlined'
-          onClick={() => router.push('/review')}
-          style={{ marginTop: '50px' }}
-        >
+        <Button variant='outlined' onClick={() => router.push('/review')}>
           리뷰하기
         </Button>
       )}
