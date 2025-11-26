@@ -166,7 +166,8 @@ const CardComponent = ({ review }) => {
       {review.image && (
         <CardMedia
           component='img'
-          height='300'
+          height='600'
+          width='auto'
           image={review.image}
           alt={review.title}
         />
